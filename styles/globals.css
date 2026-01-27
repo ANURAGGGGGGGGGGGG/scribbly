@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+.ql-editor {
+  min-height: 200px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.ql-toolbar {
+  border-top: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  border-bottom: none;
+}
+
+.ql-container {
+  border-bottom: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  border-top: none;
+}
+
+/* Safe area insets and mobile optimizations */
+:root {
+  --sat: env(safe-area-inset-top, 16px);
+  --sab: env(safe-area-inset-bottom, 16px);
+  --sal: env(safe-area-inset-left, 16px);
+  --sar: env(safe-area-inset-right, 16px);
+}
+
+.env-safe-area-inset {
+  padding-top: var(--sat);
+  padding-bottom: var(--sab);
+  padding-left: var(--sal);
+  padding-right: var(--sar);
+}
+
+.top-safe {
+  top: var(--sat);
+}
+
+.left-safe {
+  left: var(--sal);
+}
+
+.right-safe {
+  right: var(--sar);
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  touch-action: manipulation; /* Prevent double-tap zoom */
+  -ms-content-zooming: none; /* Disable zooming for IE/Edge */
+  -ms-touch-action: manipulation; /* Prevent double-tap zoom for IE/Edge */
+  overscroll-behavior: contain; /* Prevent scroll chaining */
+}
+
+/* Touch optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+}
+
+button, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* Enhance drawing canvas styles */
+.drawing-canvas {
+  cursor: crosshair;
+  touch-action: none !important;             /* Disable all touch gestures */
+  user-select: none !important;              /* Prevent text selection */
+  -webkit-user-select: none !important;      /* Safari */
+  -webkit-user-drag: none !important;        /* Safari */
+  -webkit-touch-callout: none !important;    /* Disable callout to prevent zoom */
+  overscroll-behavior: contain !important;   /* Prevent scroll chaining */
+  -ms-content-zooming: none !important;      /* Disable zooming for IE/Edge */
+}
+
+.drawing-canvas.eraser {
+  cursor: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3e%3crect width='20' height='20' fill='%23ff6b6b' rx='5' ry='5'/%3e%3c/svg%3e") 10 10, auto;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+/* Animation for tool selection */
+@keyframes toolSelected {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1.1); }
+}
+
+.tool-selected {
+  animation: toolSelected 0.3s ease-in-out;
+}
+
+/* Media query for very small screens */
+@media (max-width: 321px) {
+  .lg\:hidden.fixed.z-50 {
+    top: 0.25rem !important;
+    right: 0.25rem !important;
+    left: auto !important;
+    padding: 0.5rem !important;
+    margin: 0.25rem !important;
+    background-color: #f3f4f6 !important; /* Lighter background */
+    color: #1f2937 !important; /* Darker icon for contrast */
+  }
+  
+  .fixed.lg\:relative.z-40 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Fix for black screen issue */
+  .fixed.inset-0.z-30 {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+}
+
+/* Custom cursors for drawing tools */
+.cursor-pen {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>') 12 12, auto;
+}
+
+.cursor-pencil {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>') 12 12, auto;
+}
+
+.cursor-eraser {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M6 6l4 4"/></svg>') 12 12, auto;
+}
